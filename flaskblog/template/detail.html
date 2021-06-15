@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+{% block content %}
+	
+{% if product %}
+	<div class="content-section">
+		<p><img class="rounded mx-auto d-block" src="{{ url_for('static', filename='profile_pics/' + product.image) }}"></p><br>
+        <div class="media">
+        	
+        	<div class="media-body">
+        		<h2 class="article-title"><p>{{product.item_name}}</p></h2>
+        		<p class="text-secondary">{{ product.details }}</p>
+        		<a href="{{ product.platform }}" target="_blank">Purchase on</a>
+        		<a href="{{ product.platform }}">{{ username }}</a><br>
+        		<a href="{{ product.platform }}">{{ rev_text }}</a>
+        	</div>
+        </div>
+    </div>
+{% endif %}
+ 
+	{{ r }}
+{% if hide == 1 %}
+        You have already provided your review...
+{% else %}
+	<button class="btn btn-outline-info" onclick="miFunction()">Hide</button>
+	<div class="content-section" id="myDIV">
+			<button onclick="myFunction()" class="btn btn-outline-info" data-toggle="tooltip" title="Click and Speak"><i class="fas fa-microphone-alt"></i></button>
+		<form method="post" action="">
+			{{ form.hidden_tag() }}
+			<div class="form-group">
+				<div class="words">
+                    {{ form.review.label(class="form-control-label") }}
+
+                    {% if form.review.errors %}
+                        {{ form.review(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.review.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+
+                        {{ form.review(class="form-control form-control-lg" , id="p") }}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+		</form>
+	</div>
+{% endif %}
+	<div class="content-section">
+	{% for post in review %}
+	
+        <article class="media content-section"> 
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#"> {{post.rev_name}} </a>
+              <small class="text-muted"> {{post.date}} </small>
+            </div>
+            <h2><a class="article-title" href="#"> </a></h2>
+            <p class="article-content"> {{post.rev_text}} </p>
+            <p style="text-decoration-color: #000">
+            {% if (post.lr + post.dt + post.gbc + post.rfc) == 4 %}
+                Genuinity: 80%
+            {% elif (post.lr + post.dt + post.gbc + post.rfc) == 3 %}
+                Genuinity: 60%
+            {% elif (post.lr + post.dt + post.gbc + post.rfc) == 2 %}
+                Genuinity: 40%
+            {% elif (post.lr + post.dt + post.gbc + post.rfc) == 1 %}
+                Genuinity: 20%
+            {% else %}
+                Genuinity: 0%
+            {% endif %}
+            </p>
+          </div>
+        </article> 
+	
+	{% endfor %}
+	</div>
+{% endblock content %}

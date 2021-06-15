@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block search %}
+    <span class="nav-item">
+      <form method="POST" action="" class="form-inline my-2 my-lg-0">
+        {{ form.hidden_tag() }}
+        {{ form.identifier(hidden=True, value='FORM') }}
+        {{ form.productname(class="form-control mr-sm-2", placeholder="Search") }}
+        <button class="btn btn-sm btn-outline-light my-2 my-sm-0" type="submit"><i class="fa fa-search" style="font-size:23px"></i></button>
+      </form>
+    </span>
+{% endblock search%}
+{% block content %}
+    {% if product == None %}
+        <i>No Results</i>
+    {% else %}
+        <div class="row">
+            <div>
+                <form action="" method="POST">
+                    {{ form1.hidden_tag() }}
+                    {{ form1.identifier(hidden=True, value='FORM1') }}
+                    {{ form1.submit(class="btn btn-link") }}
+                </form>
+            </div>
+            <div>
+                <form action="" method="POST">
+                    {{ form2.hidden_tag() }}
+                    {{ form2.identifier(hidden=True, value='FORM2') }}
+                    {{ form2.submit(class="btn btn-link") }}
+                </form>
+            </div>
+        </div>
+        {% for products in product %}
+            <div class="content-section">
+          
+              <div class="media">
+                <a href="{{ url_for('detail', item=products.id) }}" id= "a1" >
+                <img class="rounded-circle account-img" src="{{ url_for('static', filename='profile_pics/' + products.image) }}"></a>
+                <div class="media-body">
+                <h2><a class="article-title" href="{{ url_for('detail', item=products.id) }}">{{ products.item_name }}</h2> </a>
+                <a href=" {{ products.platform }} " <p class="text-secondary">Purchase On
+                  </p></a>
+                </div>
+              </div>
+         
+            </div>
+        {% endfor %}
+            <div class="content-section">
+                <center>....</center>
+            </div>
+    {% endif %}
+{% endblock content %}

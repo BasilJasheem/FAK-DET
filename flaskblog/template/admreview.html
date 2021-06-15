@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+	<legend class="border-bottom mb-4">FAKE REVIEWS</legend>
+	{% for rev in review1 %}
+		<article class="media content-section"> 
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#"> {{rev.rev_name}} </a>
+              <small class="text-muted"> {{rev.date}} </small>
+            </div>
+            <h2><a class="article-title" href="#"> </a></h2>
+            <p class="article-content"> {{rev.rev_text}} </p>
+            <span>
+              <b>
+                <i>-LR :{{rev.lr}}</i>
+                <i>-DT :{{rev.dt}}</i>
+                <i>-GBC :{{rev.gbc}}</i>
+                <i>-RFC :{{rev.rfc}}</i>
+              </b>
+            </span>
+            <span style="float: right">
+            	<a class="btn btn-link" href="{{ url_for('ignore', rid=rev.id) }}">Ignore</a>
+            	<a  class="btn btn-link" href="{{ url_for('delete', rid=rev.id) }}">Delete</a>
+            </span>
+          </div>
+        </article> 
+	{% endfor %}
+</div>
+<div class="content-section">
+	<legend class="border-bottom mb-4">REPEATED IP REVIEWS</legend>
+	{% for rev1 in review2 %}
+		<article class="media content-section"> 
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#"> {{rev1.rev_name}} </a>
+              <small class="text-muted"> {{rev1.date}} </small>
+            </div>
+            <h2><a class="article-title" href="#"> </a></h2>
+            <p class="article-content"> {{rev1.rev_text}} </p>
+            <span style="float: right">
+              <a class="btn btn-link" href="{{ url_for('ignoreip', rid=rev1.id) }}">Ignore</a>
+              <a  class="btn btn-link" href="{{ url_for('delete', rid=rev1.id) }}">Delete</a>
+            </span>
+          </div>
+        </article> 
+	{% endfor %}
+</div>
+{% endblock content %}

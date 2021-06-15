@@ -1,0 +1,145 @@
+from flaskblog import db
+from flaskblog.models import Review, Product
+db.create_all()
+Product.query.all()
+product_1 = Product(item_name ='Remote', details='maxpro Remote', image='remote.jpg', 	platform='https://www.amazon.com/')
+db.session.add(product_1)
+db.session.commit()
+Product.query.first()
+Product.query.filter_by(item_name ='Remote').all()
+Product.query.filter_by(item_name ='Remote').first()
+prod1 = Product.query.filter_by(item_name ='Remote').first()
+prod1
+
+rev = Review.query.filter_by(id=1).first()
+db.session.delete(rev)
+db.session.commit()
+
+Product.query.order_by(Product.rate.desc()).all()
+
+
+Product.query.filter(func.lower(Product.item_name) == func.lower(result)).all()
+
+session['res']= Product.query.filter(func.lower(Product.item_name) == func.lower(result)).order_by(Product.item_name.asc()).all()
+
+rev1 = Review.query.all()
+for rev in rev1:
+    db.session.delete(rev)
+    db.session.commit()
+
+
+
+action="?form=oneform"
+
+
+
+
+rows_changed = Review.query.filter_by(id=2).update(dict(rate=None))
+db.session.commit()
+
+rows_changed = Review.query.update(dict(rate=None))
+db.session.commit()
+
+user = Product.query.get(1)
+user.rate = None
+db.session.commit()
+
+prod1.id
+
+Product.query.get('id')
+
+ db.drop_all()
+
+ <img class="rounded-circle account-img" src="{{ url_for('static', filename='profile_pics/' + product.image) }}">
+
+ {{ form.hid( value= "products.item_name" ) }}
+
+( value= "" )
+
+{{ form = ChooseForm(hid = 'products.item_name') }}
+
+ pip install Flask-Session
+
+rev_1 = Review(rev_name ="", date =, item_id =, rev_text =, staus =, rate =, mark =, ip =, i_mark =, i_ignore =)
+
+@app.route("/detail", methods=['GET', 'POST'])
+def detail(item):
+    form = ReviewfillForm()
+    item = session['item']
+    if form.validate_on_submit():
+
+
+rev_1 = Review(rev_name ='basi', item_id = 1, rev_text ='A Fantastic Product', staus =0, rate =7.0, mark =0, ip ='1221', i_mark =0, i_ignore =0)
+
+@app.route("/detail", methods=['GET', 'POST'])
+def detail():
+    form = ReviewfillForm()
+    if 'item' in session:
+        item = session['item']
+    if form.validate_on_submit():
+        rev_1 = Review(rev_name =current_user.username, item_id = item, rev_text =form.review.data, staus =0, rate =7.0, mark =0, ip ='1221', i_mark =0, i_ignore =0)
+
+
+@app.route("/details", methods=['GET', 'POST'])
+def details():
+    form = ReviewfillForm()
+    if 'item' in session:
+        item = session['item']
+    if form.validate_on_submit():
+        username = current_user.username
+        rev_text = form.review.data
+        rev_1 = Review(rev_name =username, item_id =item, rev_text =rev_text, staus =0, rate =7.0, mark =0, ip ='1221', i_mark =0, i_ignore =0)
+        db.session.add(rev_1)
+        db.session.commit()
+        flash('Your review has been provided!', 'success')
+        return redirect(url_for('detail', item))
+    return render_template('detail.html', title='About')
+
+     {% if form.review.errors %}
+                        {{ form.review(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.review.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.review(class="form-control form-control-lg") }}
+                    {% endif %}
+
+
+
+fabulous product
+
+
+ if form.validate_on_submit():
+            username = current_user.username
+            rev_text = form.review.data
+
+            
+## importing socket module
+import socket
+## getting the hostname by socket.gethostname() method
+hostname = socket.gethostname()
+## getting the IP address using socket.gethostbyname() method
+ip_address = socket.gethostbyname(hostname)
+## printing the hostname and ip_address
+print(f"Hostname: {hostname}")
+print(f"IP Address: {ip_address}")
+
+
+ from app.models import Post
+>>> from app import db
+>>> for post in Post.query.all():
+...    db.session.delete(post)
+>>> db.session.commit()
+
+
+rev_chk = Review.query.filter_by(ip = ip_address).all()
+            if rev_chk is None:
+                i_mark = 0
+            else:
+                i_mark = 1
+
+
+df = pd.read_json("part.json")
+df.to_csv()
